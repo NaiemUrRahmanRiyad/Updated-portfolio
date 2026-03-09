@@ -172,7 +172,7 @@ function initScrollAnimations() {
     }, observerOptions);
 
     // Observe elements
-    document.querySelectorAll('.timeline-item, .stat-item, .skill-category, .project-card').forEach(el => {
+    document.querySelectorAll('.timeline-item, .stat-item, .skill-category, .project-card, .tech-item').forEach(el => {
         observer.observe(el);
     });
 

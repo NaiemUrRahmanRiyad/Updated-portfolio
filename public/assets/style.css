@@ -528,6 +528,13 @@ body {
     border-radius: 16px;
     padding: 2rem;
     transition: var(--transition);
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.skill-category.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .skill-category:hover {
@@ -553,6 +560,11 @@ body {
 /* Technologies Section */
 .technologies-section {
     flex: 1;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
 }
 
 .technologies-section h3 {
@@ -565,7 +577,7 @@ body {
 .technologies-grid {
     display: flex;
     flex-wrap: wrap;
-    gap: 1.5rem;
+    gap: 1rem;
 }
 
 .tech-item {
@@ -579,6 +591,16 @@ body {
     border-radius: 12px;
     transition: var(--transition);
     cursor: pointer;
+    width: 100px;
+    height: 100px;
+    justify-content: center;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.tech-item.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .tech-item:hover {
