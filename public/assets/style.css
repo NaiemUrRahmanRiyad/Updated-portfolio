@@ -472,6 +472,17 @@ body {
     font-size: 1.1rem;
     line-height: 1.8;
     margin-bottom: 2rem;
+    background: var(--bg-card);
+    padding: 20px 30px;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    transition: var(--transition);
+    text-align: justify;
+}
+.about-text:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent-cyan);
+    box-shadow: 0 10px 30px rgba(0, 212, 255, 0.1);
 }
 
 .stats-grid {

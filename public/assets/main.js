@@ -490,7 +490,7 @@ function initParallax() {
     // Parallax scroll effect
     window.addEventListener('scroll', () => {
         const scrolled = window.scrollY;
-        const rate = scrolled * 0.3;
+        const rate = -scrolled * 0.2;
         heroCanvas.style.transform = `translateY(${rate}px)`;
     });
 }
