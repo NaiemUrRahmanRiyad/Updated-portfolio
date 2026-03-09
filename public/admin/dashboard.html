@@ -1,0 +1,1310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #111111;
+            --bg-card: #161616;
+            --bg-hover: #1f1f1f;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --accent-cyan: #00d4ff;
+            --accent-purple: #a855f7;
+            --border-color: #2a2a2a;
+            --danger: #ef4444;
+            --success: #10b981;
+            --warning: #f59e0b;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+        
+        /* Layout */
+        .admin-layout {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            min-height: 100vh;
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            background: var(--bg-secondary);
+            border-right: 1px solid var(--border-color);
+            padding: 2rem 0;
+            position: fixed;
+            width: 250px;
+            height: 100vh;
+            overflow-y: auto;
+        }
+        
+        .sidebar-header {
+            padding: 0 1.5rem 2rem;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 1.5rem;
+        }
+        
+        .sidebar-logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .sidebar-user {
+            margin-top: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+        
+        .nav-section {
+            padding: 0 1rem;
+        }
+        
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.875rem 1rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-radius: 8px;
+            margin-bottom: 0.25rem;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+            background: none;
+            width: 100%;
+            font-size: 0.95rem;
+        }
+        
+        .nav-item:hover,
+        .nav-item.active {
+            background: var(--bg-hover);
+            color: var(--text-primary);
+        }
+        
+        .nav-item.active {
+            background: rgba(0, 212, 255, 0.1);
+            color: var(--accent-cyan);
+        }
+        
+        .nav-badge {
+            margin-left: auto;
+            background: var(--accent-cyan);
+            color: var(--bg-primary);
+            font-size: 0.75rem;
+            padding: 0.125rem 0.5rem;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+        
+        /* Main Content */
+        .main-content {
+            margin-left: 250px;
+            padding: 2rem;
+        }
+        
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        
+        .page-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.75rem;
+        }
+        
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s;
+        }
+        
+        .stat-card:hover {
+            border-color: var(--accent-cyan);
+            transform: translateY(-2px);
+        }
+        
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-value {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent-cyan);
+        }
+        
+        /* Content Cards */
+        .content-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        
+        .card-header {
+            padding: 1.25rem 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .card-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.1rem;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.625rem 1.25rem;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            text-decoration: none;
+        }
+        
+        .btn-primary {
+            background: var(--accent-cyan);
+            color: var(--bg-primary);
+        }
+        
+        .btn-primary:hover {
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
+        }
+        
+        .btn-danger {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--danger);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+        
+        .btn-danger:hover {
+            background: var(--danger);
+            color: white;
+        }
+        
+        .btn-secondary {
+            background: var(--bg-hover);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+        
+        /* Tables */
+        .table-container {
+            overflow-x: auto;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th, td {
+            padding: 1rem 1.5rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        th {
+            font-weight: 600;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        tr:hover {
+            background: var(--bg-hover);
+        }
+        
+        .table-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .action-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            background: transparent;
+            color: var(--text-secondary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+        
+        .action-btn:hover {
+            background: var(--accent-cyan);
+            color: var(--bg-primary);
+            border-color: var(--accent-cyan);
+        }
+        
+        .action-btn.delete:hover {
+            background: var(--danger);
+            border-color: var(--danger);
+            color: white;
+        }
+        
+        /* Status Badges */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .badge-unread {
+            background: rgba(0, 212, 255, 0.1);
+            color: var(--accent-cyan);
+        }
+        
+        .badge-read {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+        }
+        
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+        }
+        
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+            transform: translateX(100%);
+            transition: transform 0.3s;
+        }
+        
+        .modal-overlay.active .modal {
+            transform: translateX(0);
+        }
+        
+        .modal-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.25rem;
+        }
+        
+        .modal-close {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 1.5rem;
+            cursor: pointer;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
+            transition: all 0.3s;
+        }
+        
+        .modal-close:hover {
+            background: var(--bg-hover);
+            color: var(--text-primary);
+        }
+        
+        .modal-body {
+            padding: 1.5rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background: var(--bg-hover);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.1);
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        .char-counter {
+            text-align: right;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-top: 0.25rem;
+        }
+        
+        /* File Upload */
+        .file-upload {
+            border: 2px dashed var(--border-color);
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .file-upload:hover {
+            border-color: var(--accent-cyan);
+            background: rgba(0, 212, 255, 0.05);
+        }
+        
+        .file-upload input {
+            display: none;
+        }
+        
+        .upload-preview {
+            margin-top: 1rem;
+            max-width: 200px;
+            border-radius: 8px;
+        }
+        
+        /* Tech Tags Input */
+        .tech-input-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            padding: 0.5rem;
+            background: var(--bg-hover);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            min-height: 46px;
+        }
+        
+        .tech-tag-input {
+            background: var(--accent-cyan);
+            color: var(--bg-primary);
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .tech-tag-input button {
+            background: none;
+            border: none;
+            color: var(--bg-primary);
+            cursor: pointer;
+            font-size: 1rem;
+            line-height: 1;
+        }
+        
+        .tech-input {
+            flex: 1;
+            min-width: 100px;
+            background: transparent;
+            border: none;
+            color: var(--text-primary);
+            padding: 0.25rem;
+            outline: none;
+        }
+        
+        /* Toggle Switch */
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 26px;
+        }
+        
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--border-color);
+            transition: .4s;
+            border-radius: 34px;
+        }
+        
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        
+        input:checked + .toggle-slider {
+            background-color: var(--accent-cyan);
+        }
+        
+        input:checked + .toggle-slider:before {
+            transform: translateX(24px);
+        }
+        
+        /* Toast */
+        .toast-container {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            z-index: 2000;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .toast {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            animation: slideIn 0.3s ease;
+            min-width: 300px;
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--text-secondary);
+        }
+        
+        .empty-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .admin-layout {
+                grid-template-columns: 1fr;
+            }
+            
+            .sidebar {
+                position: relative;
+                width: 100%;
+                height: auto;
+            }
+            
+            .main-content {
+                margin-left: 0;
+            }
+        }
+        
+        /* Hidden utility */
+        .hidden {
+            display: none !important;
+        }
+        
+        /* Message preview */
+        .message-preview {
+            max-width: 300px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">NR Admin</div>
+                <div class="sidebar-user">Logged in as Admin</div>
+            </div>
+            
+            <nav class="nav-section">
+                <button class="nav-item active" onclick="showSection('dashboard')">
+                    <span>📊</span>
+                    Dashboard
+                </button>
+                <button class="nav-item" onclick="showSection('projects')">
+                    <span>🗂</span>
+                    Projects
+                </button>
+                <button class="nav-item" onclick="showSection('messages')">
+                    <span>📬</span>
+                    Messages
+                    <span class="nav-badge hidden" id="unreadBadge">0</span>
+                </button>
+                <button class="nav-item" onclick="logout()" style="margin-top: 2rem;">
+                    <span>🚪</span>
+                    Logout
+                </button>
+            </nav>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Dashboard Section -->
+            <section id="dashboard-section" class="section-content">
+                <div class="page-header">
+                    <h1 class="page-title">Dashboard</h1>
+                </div>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-label">Total Projects</div>
+                        <div class="stat-value" id="statProjects">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Unread Messages</div>
+                        <div class="stat-value" id="statUnread">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Total Messages</div>
+                        <div class="stat-value" id="statMessages">0</div>
+                    </div>
+                </div>
+                
+                <div class="content-card">
+                    <div class="card-header">
+                        <h2 class="card-title">Recent Messages</h2>
+                        <button class="btn btn-secondary" onclick="showSection('messages')">View All</button>
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Date</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="recentMessagesTable">
+                                <!-- Populated by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Projects Section -->
+            <section id="projects-section" class="section-content hidden">
+                <div class="page-header">
+                    <h1 class="page-title">Projects</h1>
+                    <button class="btn btn-primary" onclick="openProjectModal()">
+                        <span>+</span>
+                        Add New Project
+                    </button>
+                </div>
+                
+                <div class="content-card">
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Image</th>
+                                    <th>Title</th>
+                                    <th>Category</th>
+                                    <th>Technologies</th>
+                                    <th>Featured</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="projectsTable">
+                                <!-- Populated by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="empty-state hidden" id="projectsEmpty">
+                        <div class="empty-icon">📂</div>
+                        <h3>No projects yet</h3>
+                        <p>Click "Add New Project" to create your first project</p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Messages Section -->
+            <section id="messages-section" class="section-content hidden">
+                <div class="page-header">
+                    <h1 class="page-title">Messages</h1>
+                </div>
+                
+                <div class="content-card">
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Message</th>
+                                    <th>Date</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="messagesTable">
+                                <!-- Populated by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="empty-state hidden" id="messagesEmpty">
+                        <div class="empty-icon">📭</div>
+                        <h3>No messages yet</h3>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    
+    <!-- Project Modal -->
+    <div class="modal-overlay" id="projectModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 class="modal-title" id="modalTitle">Add New Project</h2>
+                <button class="modal-close" onclick="closeProjectModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="projectForm">
+                    <input type="hidden" id="projectId">
+                    
+                    <div class="form-group">
+                        <label>Project Image</label>
+                        <div class="file-upload" onclick="document.getElementById('projectImage').click()">
+                            <input type="file" id="projectImage" accept="image/*" onchange="previewImage(this)">
+                            <div id="uploadPlaceholder">
+                                <div style="font-size: 2rem; margin-bottom: 0.5rem;">📷</div>
+                                <div>Click to upload or drag and drop</div>
+                                <div style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.5rem;">PNG, JPG up to 5MB</div>
+                            </div>
+                            <img id="imagePreview" class="upload-preview hidden">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="projectTitle">Project Title *</label>
+                        <input type="text" id="projectTitle" required placeholder="e.g. Churn Analysis Dashboard">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="projectCategory">Category *</label>
+                        <select id="projectCategory" required>
+                            <option value="">Select category</option>
+                            <option value="ML">ML</option>
+                            <option value="Visualization">Visualization</option>
+                            <option value="Research">Research</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Technologies Used</label>
+                        <div class="tech-input-container" onclick="document.getElementById('techInput').focus()">
+                            <div id="techTags"></div>
+                            <input type="text" id="techInput" class="tech-input" placeholder="Type and press comma...">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="projectDesc">Short Description *</label>
+                        <textarea id="projectDesc" required maxlength="300" placeholder="Describe what this project does..."></textarea>
+                        <div class="char-counter"><span id="charCount">0</span> / 300</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="githubUrl">GitHub Repository Link</label>
+                        <input type="url" id="githubUrl" placeholder="https://github.com/...">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="liveUrl">Live Demo Link</label>
+                        <input type="url" id="liveUrl" placeholder="https://...">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label style="display: flex; align-items: center; gap: 1rem;">
+                            <span>Featured Project</span>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="featuredToggle">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </label>
+                    </div>
+                    
+                    <div style="display: flex; gap: 1rem; justify-content: flex-end;">
+                        <button type="button" class="btn btn-secondary" onclick="closeProjectModal()">Cancel</button>
+                        <button type="submit" class="btn btn-primary" id="saveBtn">Save Project</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Message Modal -->
+    <div class="modal-overlay" id="messageModal">
+        <div class="modal" style="max-width: 500px;">
+            <div class="modal-header">
+                <h2 class="modal-title">Message Details</h2>
+                <button class="modal-close" onclick="closeMessageModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div style="margin-bottom: 1rem;">
+                    <strong>From:</strong> <span id="msgName"></span>
+                </div>
+                <div style="margin-bottom: 1rem;">
+                    <strong>Email:</strong> <span id="msgEmail"></span>
+                </div>
+                <div style="margin-bottom: 1rem;">
+                    <strong>Date:</strong> <span id="msgDate"></span>
+                </div>
+                <div style="margin-bottom: 1.5rem;">
+                    <strong>Message:</strong>
+                    <p id="msgContent" style="margin-top: 0.5rem; padding: 1rem; background: var(--bg-hover); border-radius: 8px; white-space: pre-wrap;"></p>
+                </div>
+                <div style="display: flex; gap: 1rem; justify-content: flex-end;">
+                    <button class="btn btn-secondary" onclick="closeMessageModal()">Close</button>
+                    <button class="btn btn-danger" onclick="deleteCurrentMessage()">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script>
+        // Global state
+        let projects = [];
+        let messages = [];
+        let currentMessageId = null;
+        let technologies = [];
+        
+        // Check auth on load
+        async function checkAuth() {
+            try {
+                const res = await fetch('/api/auth/check', { credentials: 'include' });
+                if (!res.ok) throw new Error('Not authenticated');
+                initDashboard();
+            } catch (err) {
+                window.location.href = '/admin/login.html';
+            }
+        }
+        
+        // Initialize
+        async function initDashboard() {
+            await Promise.all([loadProjects(), loadMessages()]);
+            updateStats();
+            renderRecentMessages();
+        }
+        
+        // Load Projects
+        async function loadProjects() {
+            try {
+                const res = await fetch('/api/projects', { credentials: 'include' });
+                projects = await res.json();
+                renderProjects();
+            } catch (err) {
+                showToast('Failed to load projects', 'error');
+            }
+        }
+        
+        // Load Messages
+        async function loadMessages() {
+            try {
+                const res = await fetch('/api/contact/messages', { credentials: 'include' });
+                messages = await res.json();
+                renderMessages();
+                updateUnreadBadge();
+            } catch (err) {
+                showToast('Failed to load messages', 'error');
+            }
+        }
+        
+        // Render Projects Table
+        function renderProjects() {
+            const tbody = document.getElementById('projectsTable');
+            const empty = document.getElementById('projectsEmpty');
+            
+            if (projects.length === 0) {
+                tbody.innerHTML = '';
+                empty.classList.remove('hidden');
+                return;
+            }
+            
+            empty.classList.add('hidden');
+            tbody.innerHTML = projects.map(p => `
+                <tr>
+                    <td>
+                        ${p.imageUrl 
+                            ? `<img src="${p.imageUrl}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 8px;">`
+                            : `<div style="width: 50px; height: 50px; background: var(--bg-hover); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--accent-cyan); font-weight: bold;">${p.title.substring(0,2).toUpperCase()}</div>`
+                        }
+                    </td>
+                    <td>${p.title}</td>
+                    <td><span class="badge badge-unread">${p.category}</span></td>
+                    <td>${p.technologies.slice(0, 3).join(', ')}${p.technologies.length > 3 ? '...' : ''}</td>
+                    <td>${p.featured ? '⭐ Yes' : 'No'}</td>
+                    <td>
+                        <div class="table-actions">
+                            <button class="action-btn" onclick="editProject('${p._id}')" title="Edit">✏️</button>
+                            <button class="action-btn delete" onclick="deleteProject('${p._id}')" title="Delete">🗑️</button>
+                        </div>
+                    </td>
+                </tr>
+            `).join('');
+        }
+        
+        // Render Messages Table
+        function renderMessages() {
+            const tbody = document.getElementById('messagesTable');
+            const empty = document.getElementById('messagesEmpty');
+            
+            if (messages.length === 0) {
+                tbody.innerHTML = '';
+                empty.classList.remove('hidden');
+                return;
+            }
+            
+            empty.classList.add('hidden');
+            tbody.innerHTML = messages.map(m => `
+                <tr style="${m.status === 'unread' ? 'background: rgba(0, 212, 255, 0.05);' : ''}">
+                    <td><strong>${m.name}</strong></td>
+                    <td>${m.email}</td>
+                    <td class="message-preview">${m.message}</td>
+                    <td>${new Date(m.createdAt).toLocaleDateString()}</td>
+                    <td>
+                        <span class="badge badge-${m.status}">${m.status}</span>
+                    </td>
+                    <td>
+                        <div class="table-actions">
+                            <button class="action-btn" onclick="viewMessage('${m._id}')" title="View">👁️</button>
+                            <button class="action-btn" onclick="toggleMessageStatus('${m._id}')" title="Toggle Status">
+                                ${m.status === 'unread' ? '✓' : '✉️'}
+                            </button>
+                            <button class="action-btn delete" onclick="deleteMessage('${m._id}')" title="Delete">🗑️</button>
+                        </div>
+                    </td>
+                </tr>
+            `).join('');
+        }
+        
+        // Render Recent Messages (Dashboard)
+        function renderRecentMessages() {
+            const tbody = document.getElementById('recentMessagesTable');
+            const recent = messages.slice(0, 5);
+            
+            if (recent.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="4" style="text-align: center; color: var(--text-secondary);">No messages yet</td></tr>';
+                return;
+            }
+            
+            tbody.innerHTML = recent.map(m => `
+                <tr>
+                    <td>${m.name}</td>
+                    <td>${m.email}</td>
+                    <td>${new Date(m.createdAt).toLocaleDateString()}</td>
+                    <td><span class="badge badge-${m.status}">${m.status}</span></td>
+                </tr>
+            `).join('');
+        }
+        
+        // Update Stats
+        function updateStats() {
+            document.getElementById('statProjects').textContent = projects.length;
+            document.getElementById('statMessages').textContent = messages.length;
+            document.getElementById('statUnread').textContent = messages.filter(m => m.status === 'unread').length;
+        }
+        
+        // Update Unread Badge
+        function updateUnreadBadge() {
+            const unread = messages.filter(m => m.status === 'unread').length;
+            const badge = document.getElementById('unreadBadge');
+            if (unread > 0) {
+                badge.textContent = unread;
+                badge.classList.remove('hidden');
+            } else {
+                badge.classList.add('hidden');
+            }
+        }
+        
+        // Section Navigation
+        function showSection(section) {
+            document.querySelectorAll('.section-content').forEach(s => s.classList.add('hidden'));
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+            
+            document.getElementById(`${section}-section`).classList.remove('hidden');
+            event.target.closest('.nav-item').classList.add('active');
+        }
+        
+        // Project Modal
+        function openProjectModal(projectId = null) {
+            const modal = document.getElementById('projectModal');
+            const form = document.getElementById('projectForm');
+            const title = document.getElementById('modalTitle');
+            
+            form.reset();
+            technologies = [];
+            renderTechTags();
+            document.getElementById('imagePreview').classList.add('hidden');
+            document.getElementById('uploadPlaceholder').classList.remove('hidden');
+            document.getElementById('charCount').textContent = '0';
+            
+            if (projectId) {
+                const project = projects.find(p => p._id === projectId);
+                if (project) {
+                    title.textContent = 'Edit Project';
+                    document.getElementById('projectId').value = project._id;
+                    document.getElementById('projectTitle').value = project.title;
+                    document.getElementById('projectCategory').value = project.category;
+                    document.getElementById('projectDesc').value = project.description;
+                    document.getElementById('githubUrl').value = project.githubUrl || '';
+                    document.getElementById('liveUrl').value = project.liveDemoUrl || '';
+                    document.getElementById('featuredToggle').checked = project.featured;
+                    document.getElementById('charCount').textContent = project.description.length;
+                    
+                    technologies = [...project.technologies];
+                    renderTechTags();
+                    
+                    if (project.imageUrl) {
+                        document.getElementById('imagePreview').src = project.imageUrl;
+                        document.getElementById('imagePreview').classList.remove('hidden');
+                        document.getElementById('uploadPlaceholder').classList.add('hidden');
+                    }
+                }
+            } else {
+                title.textContent = 'Add New Project';
+                document.getElementById('projectId').value = '';
+            }
+            
+            modal.classList.add('active');
+        }
+        
+        function closeProjectModal() {
+            document.getElementById('projectModal').classList.remove('active');
+        }
+        
+        // Image Preview
+        function previewImage(input) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('imagePreview').src = e.target.result;
+                    document.getElementById('imagePreview').classList.remove('hidden');
+                    document.getElementById('uploadPlaceholder').classList.add('hidden');
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        
+        // Tech Tags
+        document.getElementById('techInput').addEventListener('keydown', (e) => {
+            if (e.key === ',' || e.key === 'Enter') {
+                e.preventDefault();
+                const value = e.target.value.trim();
+                if (value && !technologies.includes(value)) {
+                    technologies.push(value);
+                    renderTechTags();
+                }
+                e.target.value = '';
+            } else if (e.key === 'Backspace' && e.target.value === '' && technologies.length > 0) {
+                technologies.pop();
+                renderTechTags();
+            }
+        });
+        
+        function renderTechTags() {
+            const container = document.getElementById('techTags');
+            container.innerHTML = technologies.map((tech, i) => `
+                <span class="tech-tag-input">
+                    ${tech}
+                    <button type="button" onclick="removeTech(${i})">&times;</button>
+                </span>
+            `).join('');
+        }
+        
+        function removeTech(index) {
+            technologies.splice(index, 1);
+            renderTechTags();
+        }
+        
+        // Character Counter
+        document.getElementById('projectDesc').addEventListener('input', (e) => {
+            document.getElementById('charCount').textContent = e.target.value.length;
+        });
+        
+        // Save Project
+        document.getElementById('projectForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = new FormData();
+            const projectId = document.getElementById('projectId').value;
+            const imageFile = document.getElementById('projectImage').files[0];
+            
+            if (imageFile) formData.append('image', imageFile);
+            formData.append('title', document.getElementById('projectTitle').value);
+            formData.append('category', document.getElementById('projectCategory').value);
+            formData.append('technologies', technologies.join(','));
+            formData.append('description', document.getElementById('projectDesc').value);
+            formData.append('githubUrl', document.getElementById('githubUrl').value);
+            formData.append('liveDemoUrl', document.getElementById('liveUrl').value);
+            formData.append('featured', document.getElementById('featuredToggle').checked);
+            
+            try {
+                const url = projectId ? `/api/projects/${projectId}` : '/api/projects';
+                const method = projectId ? 'PUT' : 'POST';
+                
+                const res = await fetch(url, {
+                    method,
+                    credentials: 'include',
+                    body: formData
+                });
+                
+                if (res.ok) {
+                    showToast(projectId ? 'Project updated!' : 'Project created!', 'success');
+                    closeProjectModal();
+                    await loadProjects();
+                    updateStats();
+                } else {
+                    throw new Error('Failed to save');
+                }
+            } catch (err) {
+                showToast('Error saving project', 'error');
+            }
+        });
+        
+        // Edit Project
+        function editProject(id) {
+            openProjectModal(id);
+        }
+        
+        // Delete Project
+        async function deleteProject(id) {
+            if (!confirm('Are you sure you want to delete this project?')) return;
+            
+            try {
+                const res = await fetch(`/api/projects/${id}`, {
+                    method: 'DELETE',
+                    credentials: 'include'
+                });
+                
+                if (res.ok) {
+                    showToast('Project deleted', 'success');
+                    await loadProjects();
+                    updateStats();
+                }
+            } catch (err) {
+                showToast('Error deleting project', 'error');
+            }
+        }
+        
+        // View Message
+        function viewMessage(id) {
+            const message = messages.find(m => m._id === id);
+            if (!message) return;
+            
+            currentMessageId = id;
+            document.getElementById('msgName').textContent = message.name;
+            document.getElementById('msgEmail').textContent = message.email;
+            document.getElementById('msgDate').textContent = new Date(message.createdAt).toLocaleString();
+            document.getElementById('msgContent').textContent = message.message;
+            
+            document.getElementById('messageModal').classList.add('active');
+            
+            // Mark as read if unread
+            if (message.status === 'unread') {
+                toggleMessageStatus(id, false);
+            }
+        }
+        
+        function closeMessageModal() {
+            document.getElementById('messageModal').classList.remove('active');
+            currentMessageId = null;
+        }
+        
+        // Toggle Message Status
+        async function toggleMessageStatus(id, refresh = true) {
+            const message = messages.find(m => m._id === id);
+            const newStatus = message.status === 'unread' ? 'read' : 'unread';
+            
+            try {
+                const res = await fetch(`/api/contact/messages/${id}`, {
+                    method: 'PATCH',
+                    credentials: 'include',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ status: newStatus })
+                });
+                
+                if (res.ok) {
+                    message.status = newStatus;
+                    if (refresh) {
+                        renderMessages();
+                        renderRecentMessages();
+                        updateStats();
+                        updateUnreadBadge();
+                    }
+                }
+            } catch (err) {
+                showToast('Error updating message', 'error');
+            }
+        }
+        
+        // Delete Message
+        async function deleteMessage(id) {
+            if (!confirm('Are you sure you want to delete this message?')) return;
+            
+            try {
+                const res = await fetch(`/api/contact/messages/${id}`, {
+                    method: 'DELETE',
+                    credentials: 'include'
+                });
+                
+                if (res.ok) {
+                    showToast('Message deleted', 'success');
+                    await loadMessages();
+                    updateStats();
+                }
+            } catch (err) {
+                showToast('Error deleting message', 'error');
+            }
+        }
+        
+        function deleteCurrentMessage() {
+            if (currentMessageId) {
+                deleteMessage(currentMessageId);
+                closeMessageModal();
+            }
+        }
+        
+        // Logout
+        async function logout() {
+            try {
+                await fetch('/api/auth/logout', {
+                    method: 'POST',
+                    credentials: 'include'
+                });
+                window.location.href = '/admin/login.html';
+            } catch (err) {
+                showToast('Error logging out', 'error');
+            }
+        }
+        
+        // Toast
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.innerHTML = `
+                <span>${type === 'success' ? '✓' : '✕'}</span>
+                <span>${message}</span>
+            `;
+            container.appendChild(toast);
+            setTimeout(() => toast.remove(), 3000);
+        }
+        
+        // Initialize
+        checkAuth();
+    </script>
+</body>
+</html>
