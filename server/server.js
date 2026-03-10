@@ -36,7 +36,6 @@ app.get('/', (req, res) => {
 });
 
 // Routes
-app.use('/api/projects', require('./routes/projects'));
 app.use('/api/contact', contactLimiter, require('./routes/contact'));
 
 // Test route

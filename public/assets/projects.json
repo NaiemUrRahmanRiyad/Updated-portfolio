@@ -1,0 +1,68 @@
+[
+  {
+    "id": 1,
+    "title": "AI-Powered Data Analytics Platform",
+    "category": "Full Stack",
+    "technologies": ["React", "Node.js", "MongoDB", "TensorFlow", "Python"],
+    "shortDescription": "A comprehensive data analytics platform that uses machine learning algorithms to provide predictive insights and automated reporting for business intelligence.",
+    "githubLink": "https://github.com/username/data-analytics-platform",
+    "liveDemoLink": "https://data-analytics-demo.vercel.app",
+    "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop",
+    "featured": true
+  },
+  {
+    "id": 2,
+    "title": "Real-time Chat Application",
+    "category": "Full Stack",
+    "technologies": ["React", "Socket.io", "Node.js", "Express", "MongoDB"],
+    "shortDescription": "A modern real-time messaging application with features like group chats, file sharing, and end-to-end encryption.",
+    "githubLink": "https://github.com/username/chat-app",
+    "liveDemoLink": "https://chat-app-demo.vercel.app",
+    "image": "https://images.unsplash.com/photo-1577563908411-5077b6dc7624?w=600&h=400&fit=crop",
+    "featured": true
+  },
+  {
+    "id": 3,
+    "title": "E-commerce Dashboard",
+    "category": "Frontend",
+    "technologies": ["React", "TypeScript", "Chart.js", "Tailwind CSS"],
+    "shortDescription": "An interactive dashboard for e-commerce businesses featuring sales analytics, inventory management, and customer insights.",
+    "githubLink": "https://github.com/username/ecommerce-dashboard",
+    "liveDemoLink": "https://ecommerce-dashboard-demo.vercel.app",
+    "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop",
+    "featured": false
+  },
+  {
+    "id": 4,
+    "title": "Machine Learning Model API",
+    "category": "Backend",
+    "technologies": ["Python", "Flask", "Scikit-learn", "Docker", "AWS"],
+    "shortDescription": "RESTful API service that provides machine learning model predictions for various use cases including image recognition and text analysis.",
+    "githubLink": "https://github.com/username/ml-api",
+    "liveDemoLink": null,
+    "image": "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=600&h=400&fit=crop",
+    "featured": false
+  },
+  {
+    "id": 5,
+    "title": "Portfolio Website",
+    "category": "Frontend",
+    "technologies": ["HTML", "CSS", "JavaScript", "Three.js"],
+    "shortDescription": "A modern, interactive portfolio website with 3D animations, smooth scrolling, and responsive design showcasing creative development skills.",
+    "githubLink": "https://github.com/username/portfolio",
+    "liveDemoLink": "https://portfolio-demo.vercel.app",
+    "image": "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=600&h=400&fit=crop",
+    "featured": false
+  },
+  {
+    "id": 6,
+    "title": "Task Management System",
+    "category": "Full Stack",
+    "technologies": ["Vue.js", "Laravel", "MySQL", "Redis"],
+    "shortDescription": "A collaborative task management application with real-time updates, team collaboration features, and project tracking capabilities.",
+    "githubLink": "https://github.com/username/task-manager",
+    "liveDemoLink": "https://task-manager-demo.vercel.app",
+    "image": "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=600&h=400&fit=crop",
+    "featured": false
+  }
+]
