@@ -214,9 +214,14 @@ function animateCounter(element) {
         const elapsed = currentTime - start;
         const progress = Math.min(elapsed / duration, 1);
         const easeOut = 1 - Math.pow(1 - progress, 3);
-        const current = (target * easeOut).toFixed(2);
+        const current = target * easeOut;
         
-        element.textContent = current;
+        // Check if target is a whole number and append "+"
+        if (target % 1 === 0) {
+            element.textContent = Math.floor(current) + '+';
+        } else {
+            element.textContent = current.toFixed(2);
+        }
         
         if (progress < 1) {
             requestAnimationFrame(update);
