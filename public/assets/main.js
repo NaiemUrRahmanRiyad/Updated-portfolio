@@ -16,6 +16,9 @@ document.addEventListener('DOMContentLoaded', () => {
     initContactForm();
     initBackToTop();
     initParallax();
+    initCVDownload();
+    initScrollIndicator();
+    initHeroButtonAnimations();
 });
 
 
@@ -359,7 +362,7 @@ function initContactForm() {
             const responseData = await response.json();
             
             if (response.ok) {
-                showToast('✓ Message sent successfully! Check your email for confirmation.', 'success');
+                showToast('Message sent successfully!', 'success');
                 form.reset();
             } else {
                 // Show specific error message from server
@@ -507,3 +510,78 @@ document.querySelectorAll('.magnetic-btn').forEach(btn => {
         btn.style.transform = 'translate(0, 0)';
     });
 });
+
+// CV Download Handler
+function initCVDownload() {
+    const cvBtn = document.getElementById('downloadCvBtn');
+    if (!cvBtn) return;
+    
+    cvBtn.addEventListener('click', () => {
+        const link = document.createElement('a');
+        link.href = '/assets/Naiem_Ur_Rahman_Riyad_CV.pdf';
+        link.download = 'Naiem_Ur_Rahman_Riyad_CV.pdf';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        
+        // Show toast feedback
+        showToast('📥 CV downloading...', 'success');
+    });
+}
+
+// Scroll Indicator Enhancement
+function initScrollIndicator() {
+    const scrollIndicator = document.getElementById('scrollIndicator');
+    if (!scrollIndicator) return;
+    
+    // Fade out on scroll
+    window.addEventListener('scroll', () => {
+        const scrollTop = window.scrollY;
+        const opacity = Math.max(0, 1 - scrollTop / 300);
+        scrollIndicator.style.opacity = opacity;
+        scrollIndicator.style.pointerEvents = opacity === 0 ? 'none' : 'auto';
+    });
+    
+    // Click to scroll down
+    scrollIndicator.addEventListener('click', () => {
+        const aboutSection = document.getElementById('about');
+        if (aboutSection) {
+            aboutSection.scrollIntoView({ behavior: 'smooth' });
+        }
+    });
+    
+    // Add cursor pointer on hover
+    if (!window.matchMedia('(pointer: coarse)').matches) {
+        scrollIndicator.style.cursor = 'pointer';
+    }
+}
+
+// Hero Button Animations
+function initHeroButtonAnimations() {
+    const viewWorkBtn = document.getElementById('viewWorkBtn');
+    const downloadCvBtn = document.getElementById('downloadCvBtn');
+    
+    if (viewWorkBtn) {
+        viewWorkBtn.addEventListener('mouseenter', () => {
+            const svg = viewWorkBtn.querySelector('svg');
+            if (svg) svg.style.transform = 'rotate(45deg) translateX(5px)';
+        });
+        
+        viewWorkBtn.addEventListener('mouseleave', () => {
+            const svg = viewWorkBtn.querySelector('svg');
+            if (svg) svg.style.transform = 'rotate(45deg) translateX(0)';
+        });
+    }
+    
+    if (downloadCvBtn) {
+        downloadCvBtn.addEventListener('mouseenter', () => {
+            const svg = downloadCvBtn.querySelector('svg');
+            if (svg) svg.style.transform = 'translateY(3px)';
+        });
+        
+        downloadCvBtn.addEventListener('mouseleave', () => {
+            const svg = downloadCvBtn.querySelector('svg');
+            if (svg) svg.style.transform = 'translateY(0)';
+        });
+    }
+}
