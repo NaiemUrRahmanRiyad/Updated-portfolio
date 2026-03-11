@@ -13,8 +13,7 @@ A modern, responsive portfolio website showcasing data science projects and skil
 ## 🛠️ Tech Stack
 
 - **Frontend:** HTML5, CSS3, JavaScript (ES6+)
-- **Backend:** Node.js with Express (local development)
-- **Deployment:** Vercel (serverless functions)
+- **Deployment:** Netlify (serverless functions)
 - **Email:** Nodemailer with Gmail SMTP
 
 ## 📧 Contact Form Setup
@@ -40,40 +39,30 @@ EMAIL_PASS=your-16-character-app-password
 EMAIL_TO=your-receiving-email@gmail.com
 ```
 
-For Vercel deployment, add these as environment variables in your Vercel dashboard.
+For Netlify deployment, add these as environment variables in your Netlify dashboard.
 
-## 🚀 Deployment to Vercel
+## 🚀 Deployment to Netlify
 
-### Option 1: Automatic Deployment (Recommended)
+### Quick Start (Recommended)
 
-1. **Connect to Vercel:**
-   ```bash
-   # Install Vercel CLI
-   npm i -g vercel
-
-   # Login to Vercel
-   vercel login
-
-   # Deploy
-   vercel
-   ```
+1. **Connect to Netlify:**
+   - Push your code to GitHub
+   - Go to [netlify.com](https://netlify.com) and sign up
+   - Click "New site from Git"
+   - Connect your GitHub repository
+   - Netlify will auto-detect netlify.toml
 
 2. **Set Environment Variables:**
-   - Go to your Vercel dashboard
-   - Project Settings → Environment Variables
-   - Add the three email variables from above
+   - Go to Site Settings → Build & Deploy → Environment
+   - Add these variables:
+     - `EMAIL_USER`: your-gmail@gmail.com
+     - `EMAIL_PASS`: your-16-character-app-password
+     - `EMAIL_TO`: where-to-receive@gmail.com
+   - Save and redeploy
 
-3. **Redeploy:**
-   ```bash
-   vercel --prod
-   ```
-
-### Option 2: GitHub Integration
-
-1. Push your code to GitHub
-2. Connect your GitHub repo to Vercel
-3. Add environment variables in Vercel dashboard
-4. Deploy automatically on push
+3. **Done!**
+   - Your site will be live at `your-site.netlify.app`
+   - Contact form will be fully functional
 
 ## 🔧 Local Development
 
@@ -96,19 +85,20 @@ For Vercel deployment, add these as environment variables in your Vercel dashboa
 4. **Open in browser:**
    - http://localhost:3000
 
-## 📁 Project Structure
-
-```
-portfolio/
-├── api/                    # Vercel serverless functions
-│   └── contact.js         # Contact form API
-├── public/                # Static files
-│   ├── index.html        # Main HTML
-│   ├── assets/
-│   │   ├── style.css    # Styles
-│   │   ├── main.js     # JavaScript
-│   │   └── projects.json # Project data
-├── server/               # Local Express server (dev only)
+## 📁 Project St with Netlify CLI:**
+   ```bash
+   # Install Netlify CLI
+   npm install -g netlify-cli
+netlify/
+│   └── functions/        # Netlify serverless functions
+│       └── contact.js   # Contact form handler
+├── public/              # Static files
+│   ├── index.html       # Main HTML
+│   └── assets/
+│       ├── style.css    # Styles
+│       ├── main.js      # JavaScript
+│       └── projects.json # Project data
+├── netlify.toml        # Netlify Express server (dev only)
 │   ├── server.js
 │   └── routes/
 ├── vercel.json          # Vercel configuration
@@ -120,16 +110,29 @@ portfolio/
 
 - **Projects:** Edit `public/assets/projects.json`
 - **Styling:** Modify `public/assets/style.css`
-- **Content:** Update `public/index.html`
-- **Email Template:** Modify `api/contact.js`
+- **Content:** Update `public/netlify/functions/contact.js`
 
-## 📞 Support
+## 📞 Support / Troubleshooting
 
 If the contact form doesn't work after deployment:
 
-1. Check Vercel function logs for errors
-2. Verify environment variables are set correctly
-3. Ensure Gmail App Password is valid
+1. **Check Netlify Function logs:**
+   - Go to Site Settings → Functions
+   - Check the logs for `contact` function
+
+2. **Verify environment variables:**
+   - Site Settings → Build & Deploy → Environment
+   - Ensure all three email variables are set
+
+3. **Gmail App Password:**
+   - Make sure it's the 16-character app password, not your regular password
+   - Regenerate if needed: [Google Account Settings](https://myaccount.google.com/)
+
+4. **Test locally:**
+   - Run `netlify dev` and test contact form
+   - Check browser console for any errors
+
+5. **Check spam folder for test emails**d
 4. Check spam folder for test emails
 
 ## 📄 License

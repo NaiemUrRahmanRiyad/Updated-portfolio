@@ -1,5 +1,4 @@
 // Main Portfolio JavaScript
-const API_BASE_URL = 'http://localhost:3000';
 document.addEventListener('DOMContentLoaded', () => {
     // Remove loader
     setTimeout(() => {
@@ -331,7 +330,7 @@ function initContactForm() {
         };
         
         try {
-            const response = await fetch('/api/contact', {
+            const response = await fetch('/.netlify/functions/contact', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data)
