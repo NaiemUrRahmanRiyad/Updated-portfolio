@@ -518,8 +518,8 @@ function initCVDownload() {
     
     cvBtn.addEventListener('click', () => {
         const link = document.createElement('a');
-        link.href = '/assets/Naiem_Ur_Rahman_Riyad_CV.pdf';
-        link.download = 'Naiem_Ur_Rahman_Riyad_CV.pdf';
+        link.href = '/assets/Naiem_Ur_Rahman_Riyad.pdf';
+        link.download = 'Naiem_Ur_Rahman_Riyad.pdf';
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
