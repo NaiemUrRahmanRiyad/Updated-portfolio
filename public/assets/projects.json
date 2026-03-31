@@ -18,7 +18,7 @@
     "shortDescription": "An interactive Power BI dashboard that analyzes Uber trip data to uncover booking trends, revenue insights, and customer behavior patterns. The project leverages advanced DAX, time-based analysis, and data visualization techniques to support data-driven decision-making.",
     "githubLink": "https://github.com/NaiemUrRahmanRiyad/Power-Bi-Projects/tree/5c700b6992cf9981da5f8362dd4e29e8b03fb5e3/Telecom%20Churn%20Analysis",
     "liveDemoLink": "https://app.fabric.microsoft.com/view?r=eyJrIjoiNTgyZmQzODQtMmM3ZS00OTBhLWExYmUtYzFhMGFlMTJiZWE3IiwidCI6ImM4ODk5ZDQ4LTIyN2MtNDRhZS05YzIxLWQwZDkyYmU5ODRjYyIsImMiOjEwfQ%3D%3D",
-    "image": "https://i.ibb.co.com/PXrBM3V/Screenshot-2026-03-31-105715.png",
+    "image": "https://i.ibb.co.com/Vp2H72F3/Screenshot-2026-03-31-105715.png",
     "featured": true
   },
   {
@@ -47,7 +47,7 @@
     "id": 5,
     "title": "Superstore Sales Monitoring Dashboard",
     "category": "Business Intelligence",
-    "technologies": ["SQL","Power BI", "DAX", "Power Query", "Data Modeling", "Data Visualization"],
+    "technologies": ["Power BI", "DAX", "Power Query", "Data Modeling", "Data Visualization"],
     "shortDescription": "Interactive sales analytics dashboard showcasing 1.57M in total sales, profit trends, category performance, and regional insights across the US with monthly forecasts for data-driven decision making.",
     "githubLink": "https://github.com/NaiemUrRahmanRiyad/Power-Bi-Projects/tree/10ed1d7e35594b9ce3c3bf5b8c92ecc0b41059dc/Superstore%20Sales%20Analysis",
     "liveDemoLink": "https://app.fabric.microsoft.com/view?r=eyJrIjoiMGY3NDMxZTAtM2ViOS00ZGE2LWEyMDQtMWQ0MDA4NTVhMDVkIiwidCI6ImM4ODk5ZDQ4LTIyN2MtNDRhZS05YzIxLWQwZDkyYmU5ODRjYyIsImMiOjEwfQ%3D%3D",
