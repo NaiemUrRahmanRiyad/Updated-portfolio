@@ -1,13 +1,13 @@
 [
   {
     "id": 1,
-    "title": "AI-Powered Data Analytics Platform",
-    "category": "Full Stack",
-    "technologies": ["React", "Node.js", "MongoDB", "TensorFlow", "Python"],
-    "shortDescription": "A comprehensive data analytics platform that uses machine learning algorithms to provide predictive insights and automated reporting for business intelligence.",
-    "githubLink": "https://github.com/username/data-analytics-platform",
-    "liveDemoLink": "https://data-analytics-demo.vercel.app",
-    "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop",
+    "title": "Trip Analysis Dashboard",
+  "category": "Data Analytics / Business Intelligence",
+  "technologies": ["Power BI", "DAX", "Power Query", "Data Modeling"],
+  "shortDescription": "An interactive Power BI dashboard that analyzes Uber trip data to uncover booking trends, revenue insights, and customer behavior patterns. The project leverages advanced DAX, time-based analysis, and data visualization techniques to support data-driven decision-making.",
+    "githubLink": "https://github.com/NaiemUrRahmanRiyad/Power-Bi-Projects/tree/8dd5f97768bd2f7af43c9c0b48d5669fb8dcbf0e/Power%20Bi%20Projects/Trip%20Analysis",
+    "liveDemoLink": "<iframe title=\"Jaboo Trip Analysis\" width=\"600\" height=\"373.5\" src=\"https://app.fabric.microsoft.com/view?r=eyJrIjoiNTgyZmQzODQtMmM3ZS00OTBhLWExYmUtYzFhMGFlMTJiZWE3IiwidCI6ImM4ODk5ZDQ4LTIyN2MtNDRhZS05YzIxLWQwZDkyYmU5ODRjYyIsImMiOjEwfQ%3D%3D\" frameborder=\"0\" allowFullScreen=\"true\"></iframe>",
+    "image": "https://ibb.co.com/hRbmgbjZ",
     "featured": true
   },
   {
