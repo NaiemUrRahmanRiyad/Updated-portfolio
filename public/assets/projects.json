@@ -16,7 +16,7 @@
     "category": "Data Analytics / Business Intelligence",
     "technologies": ["Power BI", "DAX", "Power Query", "Data Modeling","Data Visualization"],
     "shortDescription": "An interactive Power BI dashboard that analyzes Uber trip data to uncover booking trends, revenue insights, and customer behavior patterns. The project leverages advanced DAX, time-based analysis, and data visualization techniques to support data-driven decision-making.",
-    "githubLink": "https://github.com/NaiemUrRahmanRiyad/Power-Bi-Projects/tree/5c700b6992cf9981da5f8362dd4e29e8b03fb5e3/Telecom%20Churn%20Analysis",
+    "githubLink": "https://github.com/NaiemUrRahmanRiyad/Power-Bi-Projects/tree/main/Power%20Bi%20Projects/Trip%20Analysis",
     "liveDemoLink": "https://app.fabric.microsoft.com/view?r=eyJrIjoiNTgyZmQzODQtMmM3ZS00OTBhLWExYmUtYzFhMGFlMTJiZWE3IiwidCI6ImM4ODk5ZDQ4LTIyN2MtNDRhZS05YzIxLWQwZDkyYmU5ODRjYyIsImMiOjEwfQ%3D%3D",
     "image": "https://i.ibb.co.com/Vp2H72F3/Screenshot-2026-03-31-105715.png",
     "featured": true
